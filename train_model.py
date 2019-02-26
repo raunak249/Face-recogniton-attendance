@@ -28,5 +28,5 @@ f.write(pickle.dumps(recognizer))
 f.close()
 
 f = open(args['le'],'wb')
-f.write(pickle.dumps(labels))
+f.write(pickle.dumps(le))
 f.close()

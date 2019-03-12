@@ -13,7 +13,7 @@ ap.add_argument('-d','--detector',required=True)
 ap.add_argument('-m','--embedding_model',required=True)
 ap.add_argument('-r','--recognizer',required=True)
 ap.add_argument('-l','--le',required=True)
-ap.add_argument('-c','--confidence',type=float,default =0.5)
+ap.add_argument('-c','--confidence',type=float,default =0.7)
 args = vars(ap.parse_args())
 
 protoPath = os.path.sep.join([args['detector'],'deploy.prototxt'])
@@ -59,12 +59,16 @@ while True:
                 j = np.argmax(preds)
                 proba = preds[j]
                 name = le.classes_[j]
-                text = "{}:{:.2f}%".format(name,proba*100)
+                if proba>0.5:
+                    text = "{}:{:.2f}%".format(name,proba*100)
+                else:
+                    text = "Unknown"
                 y = startY - 10 if startY - 10 > 10 else startY+10
                 cv2.rectangle(frame,(startX,startY),(endX,endY),(0,0,255),2)
                 cv2.putText(frame,text,(startX,y),cv2.FONT_HERSHEY_SIMPLEX,0.45,(0,0,255),2)
             except Exception as ex:
                 pass
+
 
     fps.update()
 

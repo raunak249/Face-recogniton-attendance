@@ -30,7 +30,7 @@ vs = VideoStream(src = 0).start()
 time.sleep(2.0)
 
 fps = FPS().start()
-
+names = []
 while True:
     frame = vs.read()
     frame = imutils.resize(frame,width=600)
@@ -59,7 +59,10 @@ while True:
                 j = np.argmax(preds)
                 proba = preds[j]
                 name = le.classes_[j]
-                if proba>0.5:
+                if proba>0.8:
+                    if name not in names:
+                        print(name + ' is present' + str(proba*100))
+                        names.append(name)
                     text = "{}:{:.2f}%".format(name,proba*100)
                 else:
                     text = "Unknown"

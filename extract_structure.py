@@ -9,10 +9,10 @@ import imutils
 
 # constructing the argument parser
 ap = argparse.ArgumentParser()
-ap.add_argument("-i","--dataset",required=True,help="path to input image")
-ap.add_argument("-e","--embeddings",required=True,help="path to output serialized db of facial embeddings")
-ap.add_argument("-d","--detector",required=True,help="path to openCV's deep learning detector")
-ap.add_argument("-m","--structure_model",required=True,help="path to openCV's deep learning structure model")
+ap.add_argument("-i","--dataset",default='dataset',help="path to input image")
+ap.add_argument("-e","--embeddings",default='output/embeddings.pickle',help="path to output serialized db of facial embeddings")
+ap.add_argument("-d","--detector",default='face_detection_model',help="path to openCV's deep learning detector")
+ap.add_argument("-m","--structure_model",default='openface_nn4.small2.v1.t7',help="path to openCV's deep learning structure model")
 ap.add_argument("-c","--confidence",type=float, default=0.5,help="minimum probability to filter weak detections")
 args = vars(ap.parse_args())
 

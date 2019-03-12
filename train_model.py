@@ -7,9 +7,9 @@ from sklearn.svm import SVC
 
 #Declaring the argument parser and all the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument('-e','--embeddings',required=True,help='Path to the serialized embeddings')
-ap.add_argument('-r','--recognizer',required=True,help='Path to the trained model')
-ap.add_argument('-l','--le',required=True,help='Path to the output label encoder')
+ap.add_argument('-e','--embeddings',default='output/embeddings.pickle',help='Path to the serialized embeddings')
+ap.add_argument('-r','--recognizer',default='output/recognizer.pickle',help='Path to the trained model')
+ap.add_argument('-l','--le',default='output/le.pickle',help='Path to the output label encoder')
 args = vars(ap.parse_args())
 
 print('[INFO] loading the embeddings..')

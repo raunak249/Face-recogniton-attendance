@@ -1,5 +1,6 @@
 from imutils.video import VideoStream
 from imutils.video import FPS
+import pandas as pd
 import numpy as np
 import argparse
 import imutils
@@ -7,6 +8,7 @@ import pickle
 import time
 import cv2
 import os
+import time
 
 ap = argparse.ArgumentParser()
 ap.add_argument('-d','--detector',required=True)
@@ -78,6 +80,10 @@ while True:
     cv2.imshow('Frame',frame)
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
+        df = pd.DataFrame(names)
+        now = time.strftime("%d-%m-%Y")
+        title = str(now)+'.csv'
+        df.to_csv(title)
         break
 
 fps.stop()
